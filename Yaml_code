@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ask nginx
+Spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ask nginx
+  template:
+    metadata:
+      labels:
+        app: ask nginx
+    spec:
+      containers:
+        - name: ask nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+            env:
+        - name: Nginx web app
+          value: "AKS Nginx web app Demo"
+  ---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: ask Nginx
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+     app: ask nginx
